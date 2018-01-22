@@ -1,3 +1,5 @@
+## This is my fork of abandoned package with added/merged in fixes from other people around GitHub.
+
 ### English
 
 [1. Introduction](https://github.com/selahattinunlu/laravel-api-query-builder/wiki/Introduction)

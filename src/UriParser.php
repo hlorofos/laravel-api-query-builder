@@ -143,13 +143,16 @@ class UriParser
             }
         }
 
+        $value = explode($seperator, $parameter)[1];
+        $value = $value === 'null' ? null : (is_numeric($value)?(float)$value:$value);
+
         if ($index !== null) {
-            $this->queryParameters[$index]['values'][] = explode($seperator, $parameter)[1];
+            $this->queryParameters[$index]['values'][] = $value;
         } else {
             $this->queryParameters[] = [
                 'type' => $type,
                 'key' => $key,
-                'values' => [explode($seperator, $parameter)[1]]
+                'values' => [$value]
             ];
         }
     }

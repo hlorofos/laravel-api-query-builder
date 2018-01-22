@@ -261,7 +261,6 @@ class QueryBuilder
             'column' => $column,
             'direction' => $direction
         ];
-        var_dump($this->orderBy);exit;
     }
 
     private function setGroupBy($groups)

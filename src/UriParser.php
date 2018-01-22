@@ -112,7 +112,7 @@ class UriParser
         list($key, $value) = explode($operator, $parameter);
 
         if (!$this->isConstantParameter($key) && $this->isLikeQuery($value)) {
-            $operator = 'like';
+            $operator = (substr($operator, 0, 1) == '!' ? 'not like' : 'like');
             $value = str_replace('*', '%', $value);
         }
 
@@ -120,7 +120,8 @@ class UriParser
             'type' => 'Basic',
             'key' => $key,
             'operator' => $operator,
-            'value' => $value
+            // For MongoDB there should be no strings for int/float attributes
+            'value' => $value === 'null' ? null : (is_numeric($value)?(float)$value:$value)
         ];
     }
 

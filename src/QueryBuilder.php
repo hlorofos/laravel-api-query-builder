@@ -97,15 +97,40 @@ class QueryBuilder
         }
 
         return $result;
+
     }
 
-    public function paginate()
+    /**
+     * @param false|integer $limit
+     * @return mixed|Paginator
+     * @throws Exception
+     */
+    public function paginate($limit = false)
     {
-        if (!$this->hasLimit()) {
+        if (!$limit) {
+            $limit = $this->hasLimit();
+        }
+
+        if (!$limit) {
             throw new Exception("You can't use unlimited option for pagination", 1);
         }
 
-        $result = $this->basePaginate($this->limit);
+        if ($limit > config('api-query-builder.limit')) {
+            $limit = config('api-query-builder.limit');
+        }
+
+        $result = $this->basePaginate($limit);
+
+        if ($this->hasAppends()) {
+            $result = $this->addAppendsToModel($result);
+        }
+
+        return $result;
+    }
+
+    public function first()
+    {
+        $result = $this->query->first();
 
         if ($this->hasAppends()) {
             $result = $this->addAppendsToModel($result);
@@ -287,13 +312,14 @@ class QueryBuilder
         } else if ($type == 'NotIn') {
             $this->query->whereNotIn($key, $value);
         } else {
-            if ($value == '[null]') {
+            if (is_null($value)) {
                 if ($operator == '=') {
                     $this->query->whereNull($key);
                 } else {
                     $this->query->whereNotNull($key);
                 }
             } else {
+
                 $this->query->where($key, $operator, $value);
             }
         }
@@ -366,7 +392,7 @@ class QueryBuilder
 
     private function hasTableColumn($column)
     {
-        return (Schema::hasColumn($this->model->getTable(), $column));
+        return (Schema::connection($this->model->getConnectionName())->hasColumn($this->model->getTable(), $column));
     }
 
     private function hasCustomFilter($key)
@@ -413,11 +439,7 @@ class QueryBuilder
 
         $perPage = $perPage ?: $this->model->getPerPage();
 
-        if (method_exists($this->query, 'toBase')) {
-            $query = $this->query->toBase();
-        } else {
-            $query = $this->query->getQuery();
-        }
+        $query = $this->query->getQuery();
 
         $total = $query->getCountForPagination();
 

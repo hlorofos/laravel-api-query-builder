@@ -9,8 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator as BasePaginator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
-use Unlu\Laravel\Api\Exceptions\UnknownColumnException;
-use Unlu\Laravel\Api\UriParser;
+use Hlorofos\Laravel\Api\Exceptions\UnknownColumnException;
+use Hlorofos\Laravel\Api\UriParser;
 
 class QueryBuilder
 {

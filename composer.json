@@ -28,5 +28,12 @@
     "psr-4": {
       "Hlorofos\\Laravel\\Api\\": "src"
     }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Hlorofos\\Laravel\\Api\\ApiQueryBuilderServiceProvider"
+      ]
+    }
   }
 }

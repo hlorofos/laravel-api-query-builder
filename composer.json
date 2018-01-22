@@ -1,25 +1,39 @@
 {
-    "name": "unlu/laravel-api-query-builder",
-    "description": "Laravel API Query Builder Package.",
-    "type": "library",
-    "license": "MIT",
-    "keywords": ["laravel", "api"],
-    "authors": [
-        {
-            "name": "Selahattin Ünlü",
-            "email": "selahattin.unlu@yandex.com"
-        }
-    ],
-    "require": {
-        "php": ">=5.4",
-        "illuminate/support": ">=5.0.0",
-        "illuminate/database": ">=5.0.0",
-        "illuminate/http": ">=5.0.0"
+  "name": "hlorofos/laravel-api-query-builder",
+  "description": "Laravel API Query Builder Package.",
+  "type": "library",
+  "license": "MIT",
+  "keywords": [
+    "laravel",
+    "api"
+  ],
+  "authors": [
+    {
+      "name": "Selahattin Ünlü",
+      "email": "selahattin.unlu@yandex.com"
     },
-    "require-dev": {},
-    "autoload": {
-        "psr-4": {
-            "Unlu\\Laravel\\Api\\": "src"
-        }
+    {
+      "name": "Oleg Khimich",
+      "email": "hlorofos@gmail.com"
     }
+  ],
+  "require": {
+    "php": ">=5.4",
+    "illuminate/support": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*",
+    "illuminate/database": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*",
+    "illuminate/http": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*"
+  },
+  "require-dev": {},
+  "autoload": {
+    "psr-4": {
+      "Unlu\\Laravel\\Api\\": "src"
+    },
+    "extra": {
+      "laravel": {
+        "providers": [
+          "Unlu\\Laravel\\Api\\ApiQueryBuilderServiceProvider"
+        ]
+      }
+    }
+  }
 }

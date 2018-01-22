@@ -250,7 +250,12 @@ class QueryBuilder
             return;
         }
 
-        list($column, $direction) = explode(',', $order);
+        if (strpos($order, ',') === true) {
+            list($column, $direction) = explode(',', $order);
+        } else {
+            $column = $order;
+            $direction = 'asc';
+        }
 
         $this->orderBy[] = [
             'column' => $column,

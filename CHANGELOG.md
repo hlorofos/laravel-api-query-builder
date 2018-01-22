@@ -1,5 +1,9 @@
 # Release Notes
 
+## v1.8.0 (22 Jan 2018)
+
+- Moved the project to GitHub Hlorofos/laravel-api-query-builder and applied a long waited fixes from various commiters.
+
 ## v1.7.0 (13 June 2017)
 
 ### Added

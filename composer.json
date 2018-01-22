@@ -26,12 +26,12 @@
   "require-dev": {},
   "autoload": {
     "psr-4": {
-      "Unlu\\Laravel\\Api\\": "src"
+      "Hlorofos\\Laravel\\Api\\": "src"
     },
     "extra": {
       "laravel": {
         "providers": [
-          "Unlu\\Laravel\\Api\\ApiQueryBuilderServiceProvider"
+          "Hlorofos\\Laravel\\Api\\ApiQueryBuilderServiceProvider"
         ]
       }
     }

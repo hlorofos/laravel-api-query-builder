@@ -1,6 +1,6 @@
 <?php
 
-namespace Unlu\Laravel\Api;
+namespace Hlorofos\Laravel\Api;
 
 use Exception;
 use Illuminate\Database\Eloquent\Collection;

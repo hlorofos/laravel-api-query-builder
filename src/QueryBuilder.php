@@ -250,7 +250,7 @@ class QueryBuilder
             return;
         }
 
-        if (strpos($order, ',') === true) {
+        if (strpos($order, ',') !== false) {
             list($column, $direction) = explode(',', $order);
         } else {
             $column = $order;
@@ -261,6 +261,7 @@ class QueryBuilder
             'column' => $column,
             'direction' => $direction
         ];
+        var_dump($this->orderBy);exit;
     }
 
     private function setGroupBy($groups)

@@ -287,6 +287,13 @@ class QueryBuilder
 
     private function addWhereToQuery($where)
     {
+        if (strpos($where['key'], '|') === 0) {
+            $or = 'or';
+            $where['key'] = substr($where['key'], 1);
+        } else {
+            $or = 'and';
+        }
+
         extract($where);
 
         // For array values (whereIn, whereNotIn)
@@ -313,19 +320,19 @@ class QueryBuilder
 
         /** @var string $type */
         if ($type == 'In') {
-            $this->query->whereIn($key, $value);
+            $this->query->whereIn($key, $value, $or);
         } else if ($type == 'NotIn') {
-            $this->query->whereNotIn($key, $value);
+            $this->query->whereNotIn($key, $value, $or);
         } else {
             if (is_null($value)) {
                 if ($operator == '=') {
-                    $this->query->whereNull($key);
+                    $this->query->whereNull($key, $or);
                 } else {
-                    $this->query->whereNotNull($key);
+                    $this->query->whereNotNull($key, $or);
                 }
             } else {
 
-                $this->query->where($key, $operator, $value);
+                $this->query->where($key, $operator, $value, $or);
             }
         }
     }

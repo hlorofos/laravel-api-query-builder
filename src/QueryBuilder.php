@@ -40,7 +40,7 @@ class QueryBuilder
 
     protected $appends = [];
 
-    protected $query;
+    public $query;
 
     protected $result;
 

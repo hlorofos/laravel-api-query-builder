@@ -80,12 +80,15 @@ class UriParser
     {
         $explode = explode('?', $uri);
 
-        $this->queryUri = (isset($explode[1])) ? rawurldecode($explode[1]) : null;
+        $this->queryUri = $explode[1] ?? null;
     }
 
     private function setQueryParameters($queryUri)
     {
         $queryParameters = array_filter(explode('&', $queryUri));
+        $queryParameters = array_map(static function ($a) {
+            return rawurldecode($a);
+        }, $queryParameters);
 
         array_map([$this, 'appendQueryParameter'], $queryParameters);
     }
